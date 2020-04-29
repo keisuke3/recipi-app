@@ -1,5 +1,5 @@
 {
-  "name": "recipi-app",
+  "name": "recipe-app",
   "version": "1.0.0",
   "main": "index.js",
   "author": "keisuke <ka.9na3fh.h@gmail.com>",
@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "lint:js": "eslint './client/src/**/*.{js,vue}' --fix",
+    "lint:js": "eslint './client/src/**/*.{js,vue}' --fix && eslint './functions/src/**/*.js' --fix",
     "lint:css": "stylelint './client/src/**/*.{scss,vue}' --fix"
   },
   "dependencies": {
@@ -22,6 +22,7 @@
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "autoprefixer": "^9.7.6",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "eslint": "^6.7.0",
@@ -59,6 +60,7 @@
   },
   "lint-staged": {
     "client/src/**/*.{js,vue}": "eslint --fix",
-    "client/src/**/*.{scss,vue}": "stylelint --fix"
+    "client/src/**/*.{scss,vue}": "stylelint --fix",
+    "functions/src/**/*.js": "eslint --fix"
   }
 }
