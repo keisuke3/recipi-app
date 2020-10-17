@@ -11,16 +11,16 @@ const db = admin.firestore();
 module.exports = {
   async getRecipe(req, res) {
     try {
-      const recipe = [];
+      const recipes = [];
       const allRecipe = await db.collection('recipes').orderBy('createdAt', 'asc').get();
       allRecipe.forEach(doc => {
-        recipe.push({
+        recipes.push({
           id: doc.id,
           ...doc.data(),
         });
       });
       res.status(200).json({
-        data: recipe,
+        recipes,
       });
     } catch (error) {
       res.status(500).json(error);
@@ -38,11 +38,11 @@ module.exports = {
         createdAt,
       });
       const fetchRecipe = await addRecipe.get();
-      const returnRecipe = {
+      const newRecipe = {
         id: fetchRecipe.id,
         ...fetchRecipe.data(),
       };
-      res.status(200).json({ data: returnRecipe });
+      res.status(200).json({ newRecipe });
     } catch (error) {
       res.status(500).json(error);
     }
@@ -57,12 +57,12 @@ module.exports = {
         document,
         material,
       });
-      const updateRecipe = await db.collection('recipes').doc(id).get();
-      const returnRecipe = {
-        id: updateRecipe.id,
-        ...updateRecipe.data(),
+      const getRecipe = await db.collection('recipes').doc(id).get();
+      const updateRecipe = {
+        id: getRecipe.id,
+        ...getRecipe.data(),
       };
-      res.status(200).json({ data: returnRecipe });
+      res.status(200).json({ updateRecipe });
     } catch (error) {
       res.status(500).json(error);
     }
