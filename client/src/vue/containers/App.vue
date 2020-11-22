@@ -1,41 +1,21 @@
 <template>
   <div id="app">
     <p>こんにちは</p>
-    <div v-for="(item, index) in $options.static.list" :key="index">
-      <div>
-        <div>
-          <a href="">
-            {{ item.id }}
-            <p :ref="'text' + index" :class="$style.text">{{ item.text }}</p>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 export default {
   name: 'App',
-  static: {
-    list: [
-      {
-        text: 'こんにちは',
-        id: '1',
-      },
-      {
-        text: 'こんばんは',
-        id: '2',
-      },
-      {
-        text: 'おはようございます',
-        id: '3',
-      },
-      {
-        text: 'ありがとございました',
-        id: '4',
-      },
-    ],
+  computed: {
+    ...mapState('recipeList', ['recipes']),
+  },
+  created() {
+    this.getAllRecipes();
+  },
+  methods: {
+    ...mapActions('recipeList', ['getAllRecipes']),
   },
 };
 </script>
