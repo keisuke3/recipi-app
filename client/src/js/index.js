@@ -1,6 +1,6 @@
 import '../css/index.scss';
 import Vue from 'vue';
-import App from '../vue/containers/App.vue';
+import App from '../vue/components/App.vue';
 import { store } from './store/index';
 
 new Vue({
