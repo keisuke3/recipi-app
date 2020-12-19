@@ -12,7 +12,8 @@ export const requestApi = async config => {
   config.baseURL = baseURL;
 
   try {
-    return await axios(config);
+    const res = await axios(config);
+    return res.data;
   } catch (error) {
     /*eslint no-console: "off"*/
     const { status, statusText } = error;
