@@ -1,8 +1,7 @@
 <template>
-  <div />
+  <div>レシピ登録画面</div>
 </template>
 
 <script>
-import Recipe from './Recipe.vue';
 export default {};
 </script>

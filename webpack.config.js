@@ -72,25 +72,50 @@ module.exports = (env, argv) => {
         {
           test: /\.(css$|scss)$/,
           exclude: /node-modules/,
-          use: [
-            'vue-style-loader',
+          oneOf: [
             {
-              loader: 'css-loader',
-              options: {
-                modules: {
-                  localIdentName: '[local]--[hash:base64:5]',
-                }
-              },
+              resourceQuery: /module/,
+              use: [
+                'vue-style-loader',
+                {
+                  loader: 'css-loader',
+                  options: {
+                    modules: {
+                      localIdentName: '[local]--[hash:base64:5]',
+                    }
+                  },
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    plugins: [
+                      require('autoprefixer'),
+                    ]
+                  },
+                },
+                'sass-loader',
+              ]
             },
             {
-              loader: 'postcss-loader',
-              options: {
-                plugins: [
-                  require('autoprefixer'),
-                ]
-              },
-            },
-            'sass-loader',
+              use: [
+                'style-loader',
+                {
+                  loader: 'css-loader',
+                  options: {
+                    importLoaders: 2,
+                  },
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    plugins: [
+                      require('autoprefixer'),
+                    ]
+                  },
+                },
+                'sass-loader',
+              ]
+            }
           ]
         }
       ]
