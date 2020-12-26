@@ -4,26 +4,28 @@
       Loading...
     </template>
     <template v-else>
-      <h2>レシピ一覧</h2>
+      <VHeading tag="h2" class-name="heading--h2">
+        レシピ一覧
+      </VHeading>
       <template v-if="recipes.length >= 1">
-        <RecipeList v-for="(recipe, index) in recipes" :key="index" :recipe-data="recipe" />
+        <Cassette v-for="(recipe, index) in recipes" :key="index" :recipe-data="recipe" />
       </template>
-      <template v-else>
-        <RecipeListZero />
-      </template>
+      <Unregistered v-else />
     </template>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import RecipeList from '../organisms/RecipeList.vue';
-import RecipeListZero from '../organisms/RecipeListZero.vue';
+import Cassette from '../organisms/RecipeList/Cassete.vue';
+import Unregistered from '../organisms//RecipeList/Unregistered.vue';
+import { VHeading } from '@Components/atoms';
 
 export default {
   components: {
-    RecipeList,
-    RecipeListZero,
+    Cassette,
+    Unregistered,
+    VHeading,
   },
   data() {
     return {

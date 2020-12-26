@@ -19,6 +19,9 @@ module.exports = (env, argv) => {
     ],
     resolve: {
       extensions: ['.vue', '.js', '.css'],
+      alias: {
+        '@Components': path.resolve(__dirname, './client/src/components'),
+      },
     },
     entry: {
       app: [

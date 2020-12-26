@@ -1,9 +1,9 @@
 <template>
   <div :class="$style.header">
     <div :class="$style.header__inner">
-      <Heading tag="h1" class-name="header__title">
+      <VHeading tag="h1" class-name="header__title">
         マイレピ
-      </Heading>
+      </VHeading>
       <ul :class="$style.header__list">
         <li v-for="(route, index) in $options.routerName" :key="index" :class="$style.header__item">
           <router-link :to="route.path">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Heading from '../../atoms/Heading/Heading.vue';
+import { VHeading } from '@Components/atoms';
 
 export default {
   routerName: [
@@ -34,13 +34,13 @@ export default {
     },
   ],
   components: {
-    Heading,
+    VHeading,
   },
 };
 </script>
 
 <style module lang="scss">
-@import '../../../css/color';
+@import '../../css/color';
 
 .header {
   background-color: $color-white;
@@ -72,7 +72,7 @@ export default {
 </style>
 
 <style scoped lang="scss">
-@import '../../../css/color';
+@import '../../css/color';
 
 .router-link-exact-active {
   border-bottom: 2px solid $color-FE5C01;
