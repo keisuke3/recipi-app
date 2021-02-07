@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
       })
     ],
     resolve: {
-      extensions: ['.vue', '.js', '.css'],
+      extensions: ['.vue', '.js', '.ts', '.css'],
       alias: {
         '@Components': path.resolve(__dirname, './client/src/components'),
       },
@@ -57,10 +57,18 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(vue|js)$/,
+          test: /\.(vue|js|ts)$/,
           enforce: 'pre',
           exclude: /node_modules/,
           loader: 'eslint-loader',
+        },
+        {
+          test: /\.ts$/,
+          exclude: /node_modules/,
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/]
+          }
         },
         {
           test: /\.vue$/,
