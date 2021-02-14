@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import { propTypeCheck } from '../../../js/utilities/propTypeCheck';
-import { tagTypes } from './Heading.type';
+import { propTypeCheck } from '../../js/utilities/propTypeCheck';
+import { tagTypes } from './types/Heading.type';
 
 export default {
   props: {
@@ -26,12 +26,16 @@ export default {
 </script>
 
 <style module lang="scss">
-@import '../../../css/color';
-@import '../../../css/functions/rem';
+@import '../../css/color';
+@import '../../css/functions/rem';
 
 .header__title {
   align-items: center;
   display: flex;
   font-size: rem(24);
+}
+
+.heading--h2 {
+  font-size: rem(20);
 }
 </style>

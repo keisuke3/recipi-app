@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.wrapper">
-    <Header />
+    <TheHeader />
     <div :class="$style.content">
       <transition name="router" mode="out-in">
         <router-view />
@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import Header from './pages/globals/Header.vue';
+import TheHeader from './pages/TheHeader.vue';
 
 export default {
   components: {
-    Header,
+    TheHeader,
   },
 };
 </script>
@@ -22,6 +22,7 @@ export default {
 <style module lang="scss">
 .content {
   margin: 0 auto;
+  padding-top: 30px;
   width: 980px;
 }
 </style>
