@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "lint:js": "eslint './client/src/**/*.{js,vue}' --fix && eslint './functions/src/**/*.js' --fix",
+    "lint:js": "eslint './client/src/**/*.{js,ts,vue}' --fix",
     "lint:css": "stylelint './client/src/**/*.{scss,vue}' --fix"
   },
   "dependencies": {
@@ -64,7 +64,7 @@
     }
   },
   "lint-staged": {
-    "client/src/**/*.{js,vue}": "eslint --fix",
+    "client/src/**/*.{js,ts,vue}": "eslint --fix",
     "client/src/**/*.{scss,vue}": "stylelint --fix",
     "functions/src/**/*.js": "eslint --fix"
   }

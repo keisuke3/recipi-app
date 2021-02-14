@@ -25,7 +25,7 @@ module.exports = (env, argv) => {
     },
     entry: {
       app: [
-        `${src}/js/index.js`
+        `${src}/js/index.ts`
       ]
     },
     output: {
