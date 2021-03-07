@@ -2,21 +2,30 @@
   <div :class="$style.wrapper">
     <TheHeader />
     <div :class="$style.content">
-      <transition name="router" mode="out-in">
-        <router-view />
-      </transition>
+      <router-view v-slot="{ Component }">
+        <transition name="router" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import TheHeader from './pages/TheHeader.vue';
+import { defineComponent, useCssModule } from 'vue';
 
-export default {
+export default defineComponent({
   components: {
     TheHeader,
   },
-};
+  setup() {
+    const $style = useCssModule();
+    return {
+      $style,
+    };
+  },
+});
 </script>
 
 <style module lang="scss">

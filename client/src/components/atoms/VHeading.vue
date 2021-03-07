@@ -4,16 +4,17 @@
   </component>
 </template>
 
-<script>
-import { propTypeCheck } from '../../js/utilities/propTypeCheck';
+<script lang="ts">
+import { defineComponent, useCssModule } from 'vue';
+import { propTypeCheck } from '../../ts/utilities/propTypeCheck';
 import { tagTypes } from './types/Heading.type';
 
-export default {
+export default defineComponent({
   props: {
     tag: {
       type: String,
       required: true,
-      validator(val) {
+      validator(val: string) {
         return propTypeCheck(val, tagTypes);
       },
     },
@@ -22,7 +23,13 @@ export default {
       required: true,
     },
   },
-};
+  setup() {
+    const $style = useCssModule();
+    return {
+      $style,
+    };
+  },
+});
 </script>
 
 <style module lang="scss">
