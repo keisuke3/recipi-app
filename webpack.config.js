@@ -3,7 +3,7 @@ const path = require('path');
 const src = path.resolve(__dirname, './client/src');
 const outputPath = path.resolve(__dirname, './dist');
 const TerserPlugin = require('terser-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = (env, argv) => {
@@ -25,7 +25,7 @@ module.exports = (env, argv) => {
     },
     entry: {
       app: [
-        `${src}/js/index.ts`
+        `${src}/ts/index.ts`
       ]
     },
     output: {

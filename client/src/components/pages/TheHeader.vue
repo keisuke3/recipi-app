@@ -1,9 +1,7 @@
 <template>
   <div :class="$style.header">
     <div :class="$style.header__inner">
-      <VHeading tag="h1" class-name="header__title">
-        マイレピ
-      </VHeading>
+      <VHeading tag="h1" class-name="header__title">マイレピ</VHeading>
       <ul :class="$style.header__list">
         <li v-for="(route, index) in $options.routerName" :key="index" :class="$style.header__item">
           <router-link :to="route.path">
@@ -15,10 +13,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { VHeading } from '@Components/atoms';
+import { defineComponent, useCssModule } from 'vue';
 
-export default {
+export default defineComponent({
   routerName: [
     {
       name: 'レシピ',
@@ -36,7 +35,13 @@ export default {
   components: {
     VHeading,
   },
-};
+  setup() {
+    const $style = useCssModule();
+    return {
+      $style,
+    };
+  },
+});
 </script>
 
 <style module lang="scss">
