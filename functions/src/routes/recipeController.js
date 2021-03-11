@@ -19,9 +19,7 @@ module.exports = {
           ...doc.data(),
         });
       });
-      res.status(200).json({
-        recipes,
-      });
+      res.status(200).json(recipes);
     } catch (error) {
       res.status(500).json(error);
     }
