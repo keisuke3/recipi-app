@@ -15,6 +15,10 @@ module.exports = (env, argv) => {
       new VueLoaderPlugin(),
       new StyleLintPlugin({
         files: ['**/*.{vue,css,scss}'],
+      }),
+      new webpack.DefinePlugin({
+        "__VUE_OPTIONS_API__": false,
+        "__VUE_PROD_DEVTOOLS__": false,
       })
     ],
     resolve: {

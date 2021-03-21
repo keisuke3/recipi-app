@@ -1,9 +1,9 @@
 <template>
-  <div :class="$style.header">
-    <div :class="$style.header__inner">
+  <div :class="style.header">
+    <div :class="style.header__inner">
       <VHeading tag="h1" class-name="header__title">マイレピ</VHeading>
-      <ul :class="$style.header__list">
-        <li v-for="(route, index) in $options.routerName" :key="index" :class="$style.header__item">
+      <ul :class="style.header__list">
+        <li v-for="(route, index) in $options.routerName" :key="index" :class="style.header__item">
           <router-link :to="route.path">
             {{ route.name }}
           </router-link>
@@ -36,9 +36,9 @@ export default defineComponent({
     VHeading,
   },
   setup() {
-    const $style = useCssModule();
+    const style = useCssModule();
     return {
-      $style,
+      style,
     };
   },
 });

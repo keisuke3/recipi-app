@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :class="$style[className]">
+  <component :is="tag" :class="style[className]">
     <slot />
   </component>
 </template>
@@ -24,9 +24,9 @@ export default defineComponent({
     },
   },
   setup() {
-    const $style = useCssModule();
+    const style = useCssModule();
     return {
-      $style,
+      style,
     };
   },
 });
