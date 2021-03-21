@@ -1,7 +1,8 @@
-import { requestApi } from '../../utilities/requestApi';
-import { GET_CONF } from '../../utilities/axiosConfig';
+import { repositoryFactory } from '../../utilities/repositoryFactory';
 import { Mutations, Actions } from '../types/types';
 import { State, IMutations, IActions } from '../types/recipeListType';
+
+const recipesRepository = repositoryFactory.get('recipes');
 
 const state = {
   recipes: [],
@@ -15,7 +16,7 @@ const mutations: Mutations<State, IMutations> = {
 
 const actions: Actions<State, IActions, IMutations> = {
   async getAllRecipes({ commit }) {
-    const recipes = await requestApi(GET_CONF);
+    const recipes = await recipesRepository.get();
     commit('getAllRecipes', recipes);
   },
 };
