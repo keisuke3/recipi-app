@@ -1,7 +1,7 @@
 <template>
-  <div :class="$style.wrapper">
+  <div :class="style.wrapper">
     <TheHeader />
-    <div :class="$style.content">
+    <div :class="style.content">
       <router-view v-slot="{ Component }">
         <transition name="router" mode="out-in">
           <component :is="Component" />
@@ -20,9 +20,9 @@ export default defineComponent({
     TheHeader,
   },
   setup() {
-    const $style = useCssModule();
+    const style = useCssModule();
     return {
-      $style,
+      style,
     };
   },
 });

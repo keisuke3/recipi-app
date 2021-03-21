@@ -3,7 +3,7 @@
     <template v-if="isLoading">Loading...</template>
     <template v-else>
       <VHeading tag="h2" class-name="heading--h2">レシピ一覧</VHeading>
-      <template v-if="recipes.length >= 1">
+      <template v-if="recipes.length">
         <Cassette v-for="(recipe, index) in recipes" :key="index" :recipe-data="recipe" />
       </template>
       <Unregistered v-else />

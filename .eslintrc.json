@@ -4,7 +4,7 @@
     "browser": true,
     "es6": true
   },
-  "extends": ["plugin:@typescript-eslint/recommended", "plugin:vue/recommended", "prettier/vue"],
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:vue/vue3-recommended", "prettier/vue"],
   "plugins": ["@typescript-eslint", "prettier", "vue"],
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
