@@ -1,4 +1,4 @@
-import { repositoryFactory } from '../../utilities/repositoryFactory';
+import { repositoryFactory } from '../../utilities/repositories/repositoryFactory';
 import { Mutations, Actions } from '../types/types';
 import { State, IMutations, IActions } from '../types/recipeListType';
 

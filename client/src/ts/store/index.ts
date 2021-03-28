@@ -2,6 +2,7 @@ import { InjectionKey } from 'vue';
 import { createStore, useStore as baseUseStore, Store } from 'vuex';
 import { recipeList } from './modules/recipeList';
 import { shoppingList } from './modules/shoppingList';
+import { userInfo } from './modules/userInfo';
 
 export interface State {
   recipeList: {
@@ -16,5 +17,6 @@ export const store = createStore<State>({
   modules: {
     recipeList,
     shoppingList,
+    userInfo,
   },
 });
