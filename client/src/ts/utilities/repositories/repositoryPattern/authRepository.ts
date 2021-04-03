@@ -3,9 +3,9 @@ import { repository } from '../repository';
 const resource = '/signup';
 
 type registInfoType = {
+  userName: string;
   email: string;
   password: string;
-  displayName: string;
 };
 
 export const authRepository = {

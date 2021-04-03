@@ -31,7 +31,6 @@ export default defineComponent({
 <style module lang="scss">
 .content {
   margin: 0 auto;
-  padding-top: 30px;
   width: 980px;
 }
 </style>

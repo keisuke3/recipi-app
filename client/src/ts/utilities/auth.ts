@@ -15,12 +15,15 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const signIn = async (email: string, password: string) => {
-  try {
-    const user = await firebase.auth().signInWithEmailAndPassword(email, password);
-    alert(`ログインに成功しました: ${user}`);
-  } catch (error) {
-    alert(error.message);
+  const { user } = await firebase.auth().signInWithEmailAndPassword(email, password);
+  let userInfo;
+  if (user && user.email && user.displayName) {
+    userInfo = {
+      email: user.email,
+      userName: user.displayName,
+    };
   }
+  return userInfo;
 };
 
 export const signOut = async () => {
