@@ -1,1 +1,9 @@
 node_modules
+dist/
+.ds_store
+yarn-error.log
+
+# Firebase
+.firebase/
+functions/node_modules
+functions/serviceAccountKey.json
