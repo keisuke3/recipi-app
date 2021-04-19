@@ -8,6 +8,11 @@ export interface State {
   recipeList: {
     recipes: [];
   };
+  userInfo: {
+    email: string;
+    userName: string;
+    errorMessage: string;
+  };
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();

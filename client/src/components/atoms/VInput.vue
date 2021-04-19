@@ -1,25 +1,27 @@
 <template>
-  <input
+  <Field
     :id="id"
+    :name="name"
     :type="type"
-    :value="value"
     :required="required"
     :class="style.input"
     @input="handleInputChange($event.target.value)"
   />
   <label v-if="labelText" :for="id" :class="style.label">{{ labelText }}</label>
+  <ErrorMessage :name="name" :class="style.errorMessage" />
 </template>
 
 <script lang="ts">
 import { defineComponent, useCssModule, PropType } from 'vue';
+import { Field, ErrorMessage } from 'vee-validate';
 
 export default defineComponent({
+  components: {
+    Field,
+    ErrorMessage,
+  },
   props: {
     type: {
-      type: String as PropType<string>,
-      required: true,
-    },
-    value: {
       type: String as PropType<string>,
       required: true,
     },
@@ -31,17 +33,21 @@ export default defineComponent({
       type: String as PropType<string>,
       required: true,
     },
+    name: {
+      type: String as PropType<string>,
+      required: true,
+    },
     labelText: {
       type: String as PropType<string>,
       default: '',
     },
   },
   emits: ['handle-input-change'],
-  setup(_props, { emit }) {
+  setup(props, { emit }) {
     const style = useCssModule();
 
     const handleInputChange = (value: HTMLInputElement) => {
-      emit('handle-input-change', value);
+      emit('handle-input-change', value, props.name);
     };
 
     return {
@@ -59,6 +65,7 @@ export default defineComponent({
 .input {
   border: none;
   border-bottom: solid 1px $color-FE5C01;
+  cursor: text;
   display: block;
   font-size: rem(15);
   padding: 7px 0 3px;
@@ -80,5 +87,13 @@ export default defineComponent({
   position: absolute;
   top: 5px;
   transition: 0.2s;
+}
+
+.errorMessage {
+  color: $color-FE7773;
+  font-size: rem(14);
+  position: absolute;
+  top: 30px;
+  white-space: nowrap;
 }
 </style>

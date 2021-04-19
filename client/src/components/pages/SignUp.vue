@@ -1,83 +1,53 @@
 <template>
-  <div :class="style.signUp">
-    <form action="" :class="style.form">
+  <Form v-slot="{ handleSubmit }" :class="style.signUp" :validation-schema="signUpSchema.validation" as="div">
+    <form :class="style.form" novalidate @submit="handleSubmit($event, handleRegistClick)">
       <VHeading tag="h2" class-name="heading--h2">新規会員登録</VHeading>
-      <div :class="style.userName">
+      <span v-if="errorMessage" :class="style.errorMessage">{{ errorMessage }}</span>
+      <div v-for="field in signUpSchema.fields" :key="field.name" :class="style.inputWrap">
         <VInput
-          id="userName"
-          type="text"
-          :value="state.userName"
-          :required="true"
-          label-text="ユーザー名"
-          @handle-input-change="handleInputChange($event, 'userName')"
+          :id="field.name"
+          :name="field.name"
+          :type="field.type"
+          :required="field.required"
+          :label-text="field.labelText"
         />
       </div>
-      <div :class="style.email">
-        <VInput
-          id="email"
-          type="text"
-          :value="state.email"
-          :required="true"
-          label-text="メールアドレス"
-          @handle-input-change="handleInputChange($event, 'email')"
-        />
-      </div>
-      <div :class="style.password">
-        <VInput
-          id="password"
-          type="password"
-          :value="state.password"
-          :required="true"
-          label-text="パスワード"
-          @handle-input-change="handleInputChange($event, 'password')"
-        />
-      </div>
-      <VButton :class="style.registButton" class-name="authButton" @click.prevent="handleRegistClick()">
-        登録する
-      </VButton>
+      <VButton :class="style.registButton" class-name="authButton">登録する</VButton>
       <p :class="style.login">
         アカウントをお持ちですか？
         <router-link to="/signin" :class="style.loginText">ログインする</router-link>
       </p>
     </form>
-  </div>
+  </Form>
 </template>
 
 <script lang="ts">
-import { reactive, defineComponent, useCssModule } from 'vue';
+import { defineComponent, useCssModule, computed } from 'vue';
 import { useStore } from '../../ts/store/index';
 import { VButton, VHeading, VInput } from '@Components/atoms';
+import { Form } from 'vee-validate';
+import { signUpSchema } from '../../ts/utilities/schema';
 
 export default defineComponent({
   components: {
     VButton,
     VHeading,
     VInput,
+    Form,
   },
   setup() {
     const style = useCssModule();
     const store = useStore();
 
-    const state = reactive({
-      userName: '',
-      email: '',
-      password: '',
-    });
-
-    type stateType = 'userName' | 'email' | 'password';
-    const handleInputChange = (value: string, stateType: stateType) => {
-      state[stateType] = value;
-    };
-
-    const handleRegistClick = () => {
-      store.dispatch('userInfo/signUp', state);
+    const handleRegistClick = (values: { userName: string; email: string; password: string }) => {
+      store.dispatch('userInfo/signUp', values);
     };
 
     return {
-      state,
       style,
-      handleInputChange,
       handleRegistClick,
+      signUpSchema,
+      errorMessage: computed(() => store.state.userInfo.errorMessage),
     };
   },
 });
@@ -101,20 +71,26 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   padding: 30px;
+  position: relative;
   transition: 0.3s;
   width: 100%;
 }
 
-.userName,
-.email,
-.password {
-  margin-top: 30px;
+.errorMessage {
+  color: $color-FE7773;
+  font-size: rem(14);
+  position: absolute;
+  top: 65px;
+}
+
+.inputWrap {
+  margin-top: 40px;
   position: relative;
   width: 250px;
 }
 
 .registButton {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .login {

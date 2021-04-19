@@ -1,72 +1,53 @@
 <template>
-  <div :class="style.signIn">
-    <form action="" :class="style.form">
+  <Form v-slot="{ handleSubmit }" :class="style.signIn" :validation-schema="signInSchema.validation" as="div">
+    <form :class="style.form" novalidate @submit="handleSubmit($event, handleLoginClick)">
       <VHeading tag="h2" class-name="heading--h2">ログイン</VHeading>
-      <div :class="style.email">
+      <span v-if="errorMessage" :class="style.errorMessage">{{ errorMessage }}</span>
+      <div v-for="field in signInSchema.fields" :key="field.name" :class="style.inputWrap">
         <VInput
-          id="email"
-          type="text"
-          :value="state.email"
-          :required="true"
-          label-text="メールアドレス"
-          @handle-input-change="handleInputChange($event, 'email')"
+          :id="field.name"
+          :name="field.name"
+          :type="field.type"
+          :required="field.required"
+          :label-text="field.labelText"
         />
       </div>
-      <div :class="style.password">
-        <VInput
-          id="password"
-          type="password"
-          :value="state.password"
-          :required="true"
-          label-text="パスワード"
-          @handle-input-change="handleInputChange($event, 'password')"
-        />
-      </div>
-      <VButton :class="style.loginButton" class-name="authButton" @click.prevent="handleLoginClick()">
-        ログインする
-      </VButton>
+      <VButton :class="style.loginButton" class-name="authButton">ログインする</VButton>
       <p :class="style.regist">
         アカウントをお持ちでないですか？
         <router-link to="/signup" :class="style.registText">登録する</router-link>
       </p>
     </form>
-  </div>
+  </Form>
 </template>
 
 <script lang="ts">
-import { reactive, defineComponent, useCssModule } from 'vue';
+import { defineComponent, useCssModule, computed } from 'vue';
 import { useStore } from '../../ts/store/index';
+import { Form } from 'vee-validate';
 import { VButton, VHeading, VInput } from '@Components/atoms';
+import { signInSchema } from '../../ts/utilities/schema';
 
 export default defineComponent({
   components: {
     VButton,
     VHeading,
     VInput,
+    Form,
   },
   setup() {
     const style = useCssModule();
     const store = useStore();
 
-    const state = reactive({
-      email: '',
-      password: '',
-    });
-
-    type stateType = 'email' | 'password';
-    const handleInputChange = (value: string, stateType: stateType) => {
-      state[stateType] = value;
-    };
-
-    const handleLoginClick = () => {
-      store.dispatch('userInfo/signIn', state);
+    const handleLoginClick = (values: { email: string; password: string }) => {
+      store.dispatch('userInfo/signIn', values);
     };
 
     return {
-      state,
       style,
-      handleInputChange,
       handleLoginClick,
+      signInSchema,
+      errorMessage: computed(() => store.state.userInfo.errorMessage),
     };
   },
 });
@@ -89,19 +70,26 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   padding: 30px;
+  position: relative;
   transition: 0.3s;
   width: 100%;
 }
 
-.email,
-.password {
-  margin-top: 30px;
+.errorMessage {
+  color: $color-FE7773;
+  font-size: rem(14);
+  position: absolute;
+  top: 65px;
+}
+
+.inputWrap {
+  margin-top: 40px;
   position: relative;
   width: 250px;
 }
 
 .loginButton {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .regist {

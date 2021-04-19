@@ -27,14 +27,18 @@ const mutations: Mutations<State, IMutations> = {
 
 const actions: Actions<State, IActions, IMutations> = {
   async signUp({ commit }, registInfo) {
-    const userInfo = await authRepository.post(registInfo);
-    commit('signUp', userInfo);
+    try {
+      const userInfo = await authRepository.post(registInfo);
+      if (!userInfo) throw new Error('会員登録に失敗しました。もう一度お試しください');
+      commit('signUp', userInfo);
+    } catch (error) {
+      commit('errorMessage', error.message);
+    }
   },
   async signIn({ commit }, loginInfo) {
     try {
       const user = await signIn(loginInfo.email, loginInfo.password);
-      if (!user) throw new Error('ログインに失敗しました。');
-      commit('signIn', user);
+      if (user) commit('signIn', user);
     } catch (error) {
       commit('errorMessage', error.message);
     }

@@ -1,5 +1,5 @@
 <template>
-  <button :class="[style[className], style.button]">
+  <button :disabled="disabled" :class="[style[className], style.button]">
     <slot />
   </button>
 </template>
@@ -12,6 +12,10 @@ export default defineComponent({
     className: {
       type: String as PropType<string>,
       required: true,
+    },
+    disabled: {
+      type: Boolean as PropType<boolean>,
+      default: false,
     },
   },
   setup() {
