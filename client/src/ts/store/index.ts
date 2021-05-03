@@ -10,7 +10,7 @@ export interface State {
   };
   userInfo: {
     email: string;
-    userName: string;
+    displayName: string;
     errorMessage: string;
   };
 }

@@ -19,7 +19,7 @@ export const signIn = async (email: string, password: string) => {
   if (user && user.email && user.displayName) {
     userInfo = {
       email: user.email,
-      userName: user.displayName,
+      displayName: user.displayName,
     };
   }
   return userInfo;

@@ -39,7 +39,7 @@ export default defineComponent({
     const style = useCssModule();
     const store = useStore();
 
-    const handleRegistClick = (values: { userName: string; email: string; password: string }) => {
+    const handleRegistClick = (values: { displayName: string; email: string; password: string }) => {
       store.dispatch('userInfo/signUp', values);
     };
 

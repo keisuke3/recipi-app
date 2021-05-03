@@ -1,24 +1,24 @@
 type State = {
   email: string;
-  userName: string;
+  displayName: string;
   errorMessage: string;
 };
 
 type IMutations = {
   signUp: {
     email: string;
-    userName: string;
+    displayName: string;
   };
   signIn: {
     email: string;
-    userName: string;
+    displayName: string;
   };
   errorMessage: string;
 };
 
 type IActions = {
   signUp: {
-    userName: string;
+    displayName: string;
     email: string;
     password: string;
   };

@@ -7,18 +7,18 @@ const authRepository = repositoryFactory.post('signup');
 
 const state = {
   email: '',
-  userName: '',
+  displayName: '',
   errorMessage: '',
 };
 
 const mutations: Mutations<State, IMutations> = {
   signUp(state, userInfo) {
     state.email = userInfo.email;
-    state.userName = userInfo.userName;
+    state.displayName = userInfo.displayName;
   },
   signIn(state, userInfo) {
     state.email = userInfo.email;
-    state.userName = userInfo.userName;
+    state.displayName = userInfo.displayName;
   },
   errorMessage(state, message) {
     state.errorMessage = message;

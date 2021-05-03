@@ -3,7 +3,7 @@ import * as yup from 'yup';
 export const signUpSchema = {
   fields: [
     {
-      name: 'userName',
+      name: 'displayName',
       type: 'text',
       labelText: 'ユーザー名',
       required: true,
@@ -22,7 +22,7 @@ export const signUpSchema = {
     },
   ],
   validation: yup.object({
-    userName: yup.string().required('ユーザー名の入力は必須です'),
+    displayName: yup.string().required('ユーザー名の入力は必須です'),
     email: yup.string().required('メールアドレスの入力は必須です').email('正しい書式で入力してください'),
     password: yup.string().min(10, 'パスワードは10文字以上入力してください').required('パスワードの入力は必須です'),
   }),

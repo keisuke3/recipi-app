@@ -3,7 +3,7 @@ import { repository } from '../repository';
 const resource = '/signup';
 
 type registInfoType = {
-  userName: string;
+  displayName: string;
   email: string;
   password: string;
 };
