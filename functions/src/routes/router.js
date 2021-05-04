@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('./recipeController');
+const recipeController = require('./recipeController');
+const authController = require('./authController');
 
 router
   .route('/recipes')
-  .get(controller.getRecipe)
-  .post(controller.postRecipe);
+  .get(recipeController.getRecipe)
+  .post(recipeController.postRecipe);
 
 router
   .route('/recipes/:id')
-  .put(controller.putRecipe)
-  .delete(controller.deleteRecipe);
+  .put(recipeController.putRecipe)
+  .delete(recipeController.deleteRecipe);
+
+// 会員登録
+router
+  .route('/signup')
+  .post(authController.userRegit);
 
 module.exports = router;
