@@ -45,6 +45,9 @@ module.exports = (env, argv) => {
       inline: true,
       port: 8000,
       hot: true,
+      proxy: {
+        '/mock': 'http://localhost:5001'
+      },
       watchOptions: {
         ignored: /node_modules/
       },

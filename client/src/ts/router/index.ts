@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import RecipeList from '../../components/pages/RecipeList.vue';
 import RecipeRegistration from '../../components/pages/RecipeRegistration.vue';
 import ShoppingList from '../../components/pages/ShoppingList.vue';
