@@ -31,6 +31,14 @@ export default defineComponent({
       name: 'レシピ登録',
       path: '/registration',
     },
+    {
+      name: 'ログイン',
+      path: '/signin',
+    },
+    {
+      name: '会員登録',
+      path: '/signup',
+    },
   ],
   components: {
     VHeading,

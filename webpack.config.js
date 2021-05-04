@@ -5,6 +5,7 @@ const outputPath = path.resolve(__dirname, './dist');
 const TerserPlugin = require('terser-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env, argv) => {
   const IS_DEVELOPMENT = argv.mode === 'development';
@@ -19,7 +20,8 @@ module.exports = (env, argv) => {
       new webpack.DefinePlugin({
         "__VUE_OPTIONS_API__": false,
         "__VUE_PROD_DEVTOOLS__": false,
-      })
+      }),
+      // new BundleAnalyzerPlugin()
     ],
     resolve: {
       extensions: ['.vue', '.js', '.ts', '.css'],
@@ -43,9 +45,16 @@ module.exports = (env, argv) => {
       inline: true,
       port: 8000,
       hot: true,
+      proxy: {
+        '/mock': 'http://localhost:5001'
+      },
       watchOptions: {
         ignored: /node_modules/
       },
+    },
+    externals: {
+      'firebase': 'firebase',
+      'firebase/auth': '',
     },
     optimization: {
       minimizer: IS_DEVELOPMENT
